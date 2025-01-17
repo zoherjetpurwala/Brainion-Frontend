@@ -11,10 +11,6 @@ import {
   StickyNote,
   X,
   SearchIcon,
-  ArrowDown,
-  ArrowUp,
-  ArrowUp01Icon,
-  ArrowDown01Icon,
   ChevronUpCircle,
   ChevronDownCircle,
 } from "lucide-react";
