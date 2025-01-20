@@ -29,7 +29,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/user`, { withCredentials: true })
       .then((response) => {
-        setUser(response.data);
+        setUser(response.data.user);
       })
       .catch(() => {
         setUser(null);

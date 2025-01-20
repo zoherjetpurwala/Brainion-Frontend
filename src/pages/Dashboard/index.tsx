@@ -406,13 +406,13 @@ const Dashboard: React.FC = () => {
         {/* Main Content */}
         <main className="p-4 mt-24">
           <Routes>
-            <Route path="home" element={<HomePage />} />
-            <Route path="notes" element={<div>Hello World</div> } />
-            <Route path="documents" element={<div>Documents Page</div>} />
-            <Route path="videos" element={<div>Videos Page</div>} />
-            <Route path="tweets" element={<div>Tweets Page</div>} />
-            <Route path="settings" element={<div>Settings Page</div>} />
-            <Route path="profile" element={<div>Profile Page</div>} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/notes" element={<div>Hello World</div> } />
+            <Route path="/documents" element={<div>Documents Page</div>} />
+            <Route path="/videos" element={<div>Videos Page</div>} />
+            <Route path="/tweets" element={<div>Tweets Page</div>} />
+            <Route path="/settings" element={<div>Settings Page</div>} />
+            <Route path="/profile" element={<div>Profile Page</div>} />
             <Route
               path="*"
               element={<Navigate to="/dashboard/home" replace />}
