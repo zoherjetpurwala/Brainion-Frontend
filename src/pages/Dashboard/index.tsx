@@ -19,6 +19,7 @@ import { SearchBar } from "../../components/ui/search-bar";
 import HomePage from "../../components/dashboard/HomePage";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
+import LoadingAnimation from "../../components/LoadingAnimation";
 
 const Dashboard: React.FC = () => {
   const { user, loading, logout } = useUser();
@@ -107,7 +108,7 @@ const Dashboard: React.FC = () => {
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 p-4 overflow-y-auto"
+            className="fixed inset-0 bg-gradient-to-br from-blue-500/50 to-white/50 flex justify-center items-start z-50 p-4 overflow-y-auto"
           >
             <style>{`
               div::-webkit-scrollbar {
@@ -131,9 +132,11 @@ const Dashboard: React.FC = () => {
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="text-center text-gray-600 bg-white rounded-2xl p-8"
+                      className="items-center flex flex-col justify-center text-center text-gray-600 rounded-2xl p-8 mt-2"
                     >
-                      Searching...
+                      <LoadingAnimation/>
+                      <p className="loading-text pt-1 text-black">Searching</p>
+
                     </motion.p>
                   )}
 
@@ -408,7 +411,7 @@ const Dashboard: React.FC = () => {
         <main className="p-4 mt-24">
           <Routes>
             <Route path="/home" element={<HomePage />} />
-            <Route path="/notes" element={<div>Hello World</div>} />
+            <Route path="/notes" element={<LoadingAnimation/>} />
             <Route path="/documents" element={<div>Documents Page</div>} />
             <Route path="/videos" element={<div>Videos Page</div>} />
             <Route path="/tweets" element={<div>Tweets Page</div>} />

@@ -95,3 +95,72 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
+
+
+/* Styling the container */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* The glowing shape */
+.loading-shape {
+  background: radial-gradient(circle, #003cff, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 38, 255, 0.8),
+              0 0 40px rgba(0, 38, 255, 0.6),
+              0 0 60px rgba(0, 38, 255, 0.4);
+  animation: morph 3s infinite ease-in-out, glow 2s infinite alternate;
+}
+
+/* Morphing effect */
+@keyframes morph {
+  0% {
+    transform: scale(1) rotate(0deg);
+    border-radius: 50%;
+  }
+  50% {
+    transform: scale(1.2) rotate(90deg);
+    border-radius: 40%;
+  }
+  100% {
+    transform: scale(1) rotate(180deg);
+    border-radius: 50%;
+  }
+}
+
+/* Glowing effect */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 38, 255, 0.5),
+                0 0 30px rgba(0, 38, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 38, 255, 0.8),
+                0 0 60px rgba(0, 38, 255, 0.6);
+  }
+}
+
+/* Loading text */
+.loading-text {
+  font-size: 16px;
+  color: #888;
+  margin-top: 20px;
+  animation: fadeIn 2s infinite;
+}
+
+/* Fading effect for text */
+@keyframes fadeIn {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
