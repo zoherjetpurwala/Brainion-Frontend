@@ -1,14 +1,16 @@
 import React from "react";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 interface SearchBarProps {
   placeholder?: string;
   onSearch: (query: string) => void;
+  toggleSearchBar: any;
 }
 
 export function SearchBar({
   placeholder = "Search...",
   onSearch,
+  toggleSearchBar,
 }: SearchBarProps) {
   const [query, setQuery] = React.useState("");
 
@@ -18,8 +20,8 @@ export function SearchBar({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full">
-      <div className="relative ">
+    <form onSubmit={handleSubmit} className="relative w-full flex gap-1">
+      <div className="relative w-full">
         <Search
           className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
           aria-hidden="true"
@@ -35,6 +37,13 @@ export function SearchBar({
       </div>
       <button type="submit" className="sr-only">
         Search
+      </button>
+      <button
+        onClick={toggleSearchBar}
+        className="p-3  text-2xl rounded-2xl text-gray-600 bg-white hover:text-gray-800 transition-colors"
+        aria-label="Close search"
+      >
+        <X className="w-4 h-4" />
       </button>
     </form>
   );

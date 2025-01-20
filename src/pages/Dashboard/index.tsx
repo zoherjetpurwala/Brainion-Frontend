@@ -51,11 +51,14 @@ const Dashboard: React.FC = () => {
       const userId = user.id;
       const contentType = "NOTE";
 
-      const response = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/notes`, {
-        query: searchQuery,
-        userId,
-        contentType,
-      });
+      const response = await axios.patch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/notes`,
+        {
+          query: searchQuery,
+          userId,
+          contentType,
+        }
+      );
 
       const { title, answer, listOfNotes } = response.data;
 
@@ -117,16 +120,10 @@ const Dashboard: React.FC = () => {
               exit={{ y: -50, opacity: 0 }}
               className="rounded-2xl w-full max-w-3xl relative mt-8"
             >
-              <button
-                onClick={toggleSearchBar}
-                className="absolute top-4 p-1 right-[-4px] text-2xl text-gray-600 bg-white rounded-lg hover:text-gray-800 transition-colors"
-                aria-label="Close search"
-              >
-                <X className="w-4 h-4" />
-              </button>
               <div className="p-6">
                 <SearchBar
                   onSearch={handleSearch}
+                  toggleSearchBar={toggleSearchBar}
                   placeholder="Search for anything..."
                 />
                 <div className="max-h-[calc(100vh-200px)] overflow-y-auto rounded-2xl">
@@ -168,7 +165,11 @@ const Dashboard: React.FC = () => {
                             onClick={() => setIsOpen((prev) => !prev)} // Toggle isOpen state
                             className="text-blue-500 hover:text-blue-700"
                           >
-                            {isOpen ? <ChevronUpCircle className="w-4 h-4"/> : <ChevronDownCircle className="w-4 h-4" />}
+                            {isOpen ? (
+                              <ChevronUpCircle className="w-4 h-4" />
+                            ) : (
+                              <ChevronDownCircle className="w-4 h-4" />
+                            )}
                           </button>
                         </div>
                         {isOpen && (
@@ -367,7 +368,7 @@ const Dashboard: React.FC = () => {
       {/* Main Content Area */}
       <div className="flex-1 lg:pl-64 flex flex-col w-full bg-gray-50 transition-all duration-300">
         {/* Navbar */}
-        <div className="w-full sm:w-[calc(100%-16rem)] fixed h-24 p-4 flex items-center justify-between z-10 bg-gray-50">
+        <div className="w-full sm:w-[calc(100%-16rem)] fixed h-20 p-4 flex items-center justify-between z-10 bg-gray-50/50 backdrop-blur-xl ">
           <div className="flex items-center">
             <button
               onClick={toggleSidebar}
@@ -380,7 +381,7 @@ const Dashboard: React.FC = () => {
                 <Menu className="h-6 w-6" />
               )}
             </button>
-            <h1 className="text-2xl font-normal max-sm:hidden">
+            <h1 className="text-2xl font-normal">
               {activeContent}
             </h1>
           </div>
@@ -407,7 +408,7 @@ const Dashboard: React.FC = () => {
         <main className="p-4 mt-24">
           <Routes>
             <Route path="/home" element={<HomePage />} />
-            <Route path="/notes" element={<div>Hello World</div> } />
+            <Route path="/notes" element={<div>Hello World</div>} />
             <Route path="/documents" element={<div>Documents Page</div>} />
             <Route path="/videos" element={<div>Videos Page</div>} />
             <Route path="/tweets" element={<div>Tweets Page</div>} />
