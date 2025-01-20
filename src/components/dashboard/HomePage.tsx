@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Share, Share2, Trash2 } from "lucide-react";
+import { Share2, Trash2 } from "lucide-react";
 
 interface Note {
   id: string;
