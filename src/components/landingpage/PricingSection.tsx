@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { Button } from "../components/ui/button";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
+} from "../ui/card";
 
 const plans = [
   {

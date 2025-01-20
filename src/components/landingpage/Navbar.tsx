@@ -5,8 +5,8 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
-import { Button } from "./ui/button";
+} from "../ui/dialog";
+import { Button } from "../ui/button";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 

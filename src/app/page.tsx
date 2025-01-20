@@ -1,12 +1,12 @@
-import HeroComponent from '../components/HeroComponent'
-import FeaturesSection from '../components/FeaturesSection'
-import HowItWorksSection from '../components/HowItWorksSection'
-import TestimonialsSection from '../components/TestimonialsSection'
-import PricingSection from '../components/PricingSection'
-import FAQSection from '../components/FAQSection'
-import CTASection from '../components/CTASection'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import HeroComponent from '../components/landingpage/HeroComponent'
+import FeaturesSection from '../components/landingpage/FeaturesSection'
+import HowItWorksSection from '../components/landingpage/HowItWorksSection'
+import TestimonialsSection from '../components/landingpage/TestimonialsSection'
+import PricingSection from '../components/landingpage/PricingSection'
+import FAQSection from '../components/landingpage/FAQSection'
+import CTASection from '../components/landingpage/CTASection'
+import Footer from '../components/landingpage/Footer'
+import Navbar from '../components/landingpage/Navbar'
 
 export default function Home() {
   return (

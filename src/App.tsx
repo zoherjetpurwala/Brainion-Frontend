@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { UserProvider, useUser } from "./context/UserContext";
-import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 
 const AppRoutes: React.FC = () => {
@@ -15,7 +15,7 @@ const AppRoutes: React.FC = () => {
   return (
     <Routes>
       {/* Public Route */}
-      <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Home />} />
+      <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
 
       {/* Private Route */}
       <Route

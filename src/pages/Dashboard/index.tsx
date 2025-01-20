@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import {
   Home,
   Menu,
@@ -15,9 +15,8 @@ import {
   ChevronDownCircle,
 } from "lucide-react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { SearchBar } from "../components/ui/search-bar";
-import HomePage from "../components/dashboard/HomePage";
-import AskQuestionPage from "../components/dashboard/AskQuestionPage";
+import { SearchBar } from "../../components/ui/search-bar";
+import HomePage from "../../components/dashboard/HomePage";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -408,7 +407,7 @@ const Dashboard: React.FC = () => {
         <main className="p-4 mt-24">
           <Routes>
             <Route path="home" element={<HomePage />} />
-            <Route path="notes" element={<AskQuestionPage />} />
+            <Route path="notes" element={<div>Hello World</div> } />
             <Route path="documents" element={<div>Documents Page</div>} />
             <Route path="videos" element={<div>Videos Page</div>} />
             <Route path="tweets" element={<div>Tweets Page</div>} />
