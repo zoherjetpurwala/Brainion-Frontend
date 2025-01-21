@@ -9,11 +9,14 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Share2, Trash2 } from "lucide-react";
+import { Badge } from "../ui/badge";
 
 interface Note {
   id: string;
+  type: string;
   title: string;
   content: string;
+  url: string;
   createdAt: string;
 }
 
@@ -75,69 +78,66 @@ const HomePage: React.FC = () => {
     fetchData();
   }, []);
 
+  const getExtensionFromURL = (url: string): string | null => {
+    const parts = url.split(".");
+    const extension = parts.length > 1 ? parts.pop() : null;
+    return extension ?? null;
+  };
+
   return (
-    <div className="p-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-      {notes.map((note) => (
-        <Card className="h-full flex flex-col hover:shadow-xl">
-          <CardHeader>
-            <CardTitle className="flex justify-between items-center">
-              <h1 className="text-lg font-semibold text-primary truncate">
-                {note.title}
-              </h1>
-              <div className="flex gap-1">
-                <Trash2
-                  onClick={() => handleDelete(note.id)}
-                  className="w-5 h-5 text-red-600"
-                />
-                <Share2
-                  onClick={() => handleShare(note.id)}
-                  className="w-5 h-5"
-                />
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-800">
-              {truncateContent(note.content, 30)}
-            </p>
-          </CardContent>
-          <CardFooter>
-            <p className="text-gray-500 text-sm">
-              {new Date(note.createdAt).toLocaleDateString()}
-            </p>
-          </CardFooter>
-        </Card>
-        // <div
-        //   key={note.id}
-        //   className="border border-gray-300 rounded-lg shadow-lg p-6 bg-gradient-to-r from-indigo-100 to-blue-50 hover:shadow-xl transition-shadow"
-        // >
-        //   <h3 className="text-xl font-semibold text-indigo-900 truncate">
-        //     {note.title}
-        //   </h3>
-        //   <p className="text-gray-800 mt-4">
-        //     {truncateContent(note.content, 30)}
-        //   </p>
-        //   <p className="text-gray-500 text-sm mt-4">
-        //     {new Date(note.createdAt).toLocaleDateString()}
-        //   </p>
-        //   <div className="mt-6 flex justify-between items-center">
-        //     <button
-        //       className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
-        //       onClick={() => handleDelete(note.id)}
-        //     >
-        //       Delete
-        //     </button>
-        //     <button
-        //       className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
-        //       onClick={() => handleShare(note.id)}
-        //     >
-        //       Share
-        //     </button>
-        //   </div>
-        // </div>
-      ))}
-    </div>
-  );
+    <div
+    className="grid grid-flow-dense auto-rows-auto grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6"
+  >
+    {notes.map((note) => (
+      <Card
+        className={`${
+          note.type === "DOCUMENT" ? "col-span-1 row-span-2" : ""
+        } p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
+      >
+        <CardHeader className="p-2 border-b">
+          <CardTitle className="flex justify-between items-center p-0">
+            <h1 className="text-lg font-semibold text-primary truncate">
+              {note.title}
+            </h1>
+            <div className="flex gap-1 items-center">
+              <Badge className="border border-blue-800/25 rounded-full">{note.type}</Badge>
+              <Trash2
+                onClick={() => handleDelete(note.id)}
+                className="w-4 h-4 text-red-600 cursor-pointer"
+              />
+            </div>
+          </CardTitle>
+        </CardHeader>
+  
+        <CardContent className="p-2 flex-1 overflow-hidden border-b">
+          <p
+            className={`text-gray-800 line-clamp-3 ${
+              note.type === "DOCUMENT"
+                ? "flex h-full justify-center items-center"
+                : ""
+            }`}
+          >
+            {note.type === "DOCUMENT" ? (
+              getExtensionFromURL(note.url) === "pdf" ? (
+                <img src="/pdf-document.svg" className="w-12 h-12" />
+              ) : (
+                <Share2 />
+              )
+            ) : (
+              truncateContent(note.content, 30)
+            )}
+          </p>
+        </CardContent>
+  
+        <CardFooter className="p-2">
+          <p className="text-gray-500 text-sm">
+            {new Date(note.createdAt).toLocaleDateString()}
+          </p>
+        </CardFooter>
+      </Card>
+    ))}
+  </div>
+  )
 };
 
 export default HomePage;

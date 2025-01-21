@@ -408,7 +408,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Main Content */}
-        <main className="p-4 mt-24">
+        <main className="p-4 mt-20">
           <Routes>
             <Route path="/home" element={<HomePage />} />
             <Route path="/notes" element={<LoadingAnimation/>} />
