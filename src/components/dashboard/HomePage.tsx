@@ -31,9 +31,9 @@ const truncateContent = (content: string, wordLimit: number): string => {
 const getWordsCount = (content: string): number => {
   const words = content.split(" ");
   console.log(words.length);
-  
+
   return words.length;
-}
+};
 
 const HomePage: React.FC = () => {
   const { user } = useUser();
@@ -86,56 +86,66 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="grid grid-flow-dense auto-rows-auto grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6">
-      {notes.map((note) => (
-        <Card
-          className={`${
-            getWordsCount(note.content) > 15 ? "col-span-1 row-span-2" : ""
-          } p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
-        >
-          <CardHeader className="p-2 border-b">
-            <CardTitle className="flex justify-between items-center p-0">
-              <h1 className="text-lg font-semibold text-primary truncate">
-                {note.title}
-              </h1>
-              <div className="flex gap-1 items-center">
-                <Badge className="border border-blue-800/25 rounded-full">
-                  {note.type}
-                </Badge>
-                <Trash2
-                  onClick={() => handleDelete(note.id)}
-                  className="w-4 h-4 text-red-600 cursor-pointer"
-                />
-              </div>
-            </CardTitle>
-          </CardHeader>
+      {notes.map((note) => {
+        const wordCount = getWordsCount(note.content);
+        const dynamicClass =
+          note.type === "NOTE"
+            ? wordCount > 50
+              ? "col-span-2 row-span-2"
+              : wordCount > 25
+              ? "row-span-2"
+              : ""
+            : "col-span-1 row-span-1";
+        return (
+          <Card
+            className={`${dynamicClass} p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
+          >
+            <CardHeader className="p-2 border-b">
+              <CardTitle className="flex justify-between items-center p-0">
+                <h1 className="text-lg font-semibold text-primary truncate">
+                  {note.title}
+                </h1>
+                <div className="flex gap-1 items-center">
+                  <Badge className="border border-blue-800/25 rounded-full">
+                    {note.type}
+                  </Badge>
+                  <Trash2
+                    onClick={() => handleDelete(note.id)}
+                    className="w-4 h-4 text-red-600 cursor-pointer"
+                  />
+                  {getWordsCount(note.content)}
+                </div>
+              </CardTitle>
+            </CardHeader>
 
-          <CardContent className="p-2 flex-1 overflow-hidden border-b">
-            <p
-              className={`text-gray-800 line-clamp-3 ${
-                note.type === "DOCUMENT"
-                  ? "flex h-full justify-center items-center"
-                  : ""
-              }`}
-            >
-              {note.type === "DOCUMENT" ? (
-                getExtensionFromURL(note.url) === "pdf" ? (
-                  <img src="/pdf-document.svg" className="w-12 h-12" />
+            <CardContent className="p-2 flex-auto overflow-hidden border-b">
+              <p
+                className={`text-gray-800 line-clamp-3 ${
+                  note.type === "DOCUMENT"
+                    ? "flex h-full justify-center items-center"
+                    : ""
+                }`}
+              >
+                {note.type === "DOCUMENT" ? (
+                  getExtensionFromURL(note.url) === "pdf" ? (
+                    <img src="/pdf-document.svg" className="w-12 h-12" />
+                  ) : (
+                    <Share2 />
+                  )
                 ) : (
-                  <Share2 />
-                )
-              ) : (
-                truncateContent(note.content, 30)
-              )}
-            </p>
-          </CardContent>
+                  truncateContent(note.content, 50)
+                )}
+              </p>
+            </CardContent>
 
-          <CardFooter className="p-2">
-            <p className="text-gray-500 text-sm">
-              {new Date(note.createdAt).toLocaleDateString()}
-            </p>
-          </CardFooter>
-        </Card>
-      ))}
+            <CardFooter className="p-2">
+              <p className="text-gray-500 text-sm">
+                {new Date(note.createdAt).toLocaleDateString()}
+              </p>
+            </CardFooter>
+          </Card>
+        );
+      })}
     </div>
   );
 };
