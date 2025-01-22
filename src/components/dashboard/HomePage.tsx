@@ -67,13 +67,6 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const handleShare = (id: string) => {
-    const shareUrl = `${import.meta.env.VITE_CLIENT_URL}/shared/${id}`;
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      alert("Note link copied to clipboard!");
-    });
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -85,59 +78,59 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div
-    className="grid grid-flow-dense auto-rows-auto grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6"
-  >
-    {notes.map((note) => (
-      <Card
-        className={`${
-          note.type === "DOCUMENT" ? "col-span-1 row-span-2" : ""
-        } p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
-      >
-        <CardHeader className="p-2 border-b">
-          <CardTitle className="flex justify-between items-center p-0">
-            <h1 className="text-lg font-semibold text-primary truncate">
-              {note.title}
-            </h1>
-            <div className="flex gap-1 items-center">
-              <Badge className="border border-blue-800/25 rounded-full">{note.type}</Badge>
-              <Trash2
-                onClick={() => handleDelete(note.id)}
-                className="w-4 h-4 text-red-600 cursor-pointer"
-              />
-            </div>
-          </CardTitle>
-        </CardHeader>
-  
-        <CardContent className="p-2 flex-1 overflow-hidden border-b">
-          <p
-            className={`text-gray-800 line-clamp-3 ${
-              note.type === "DOCUMENT"
-                ? "flex h-full justify-center items-center"
-                : ""
-            }`}
-          >
-            {note.type === "DOCUMENT" ? (
-              getExtensionFromURL(note.url) === "pdf" ? (
-                <img src="/pdf-document.svg" className="w-12 h-12" />
+    <div className="grid grid-flow-dense auto-rows-auto grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6">
+      {notes.map((note) => (
+        <Card
+          className={`${
+            note.type === "DOCUMENT" ? "col-span-1 row-span-2" : ""
+          } p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
+        >
+          <CardHeader className="p-2 border-b">
+            <CardTitle className="flex justify-between items-center p-0">
+              <h1 className="text-lg font-semibold text-primary truncate">
+                {note.title}
+              </h1>
+              <div className="flex gap-1 items-center">
+                <Badge className="border border-blue-800/25 rounded-full">
+                  {note.type}
+                </Badge>
+                <Trash2
+                  onClick={() => handleDelete(note.id)}
+                  className="w-4 h-4 text-red-600 cursor-pointer"
+                />
+              </div>
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent className="p-2 flex-1 overflow-hidden border-b">
+            <p
+              className={`text-gray-800 line-clamp-3 ${
+                note.type === "DOCUMENT"
+                  ? "flex h-full justify-center items-center"
+                  : ""
+              }`}
+            >
+              {note.type === "DOCUMENT" ? (
+                getExtensionFromURL(note.url) === "pdf" ? (
+                  <img src="/pdf-document.svg" className="w-12 h-12" />
+                ) : (
+                  <Share2 />
+                )
               ) : (
-                <Share2 />
-              )
-            ) : (
-              truncateContent(note.content, 30)
-            )}
-          </p>
-        </CardContent>
-  
-        <CardFooter className="p-2">
-          <p className="text-gray-500 text-sm">
-            {new Date(note.createdAt).toLocaleDateString()}
-          </p>
-        </CardFooter>
-      </Card>
-    ))}
-  </div>
-  )
+                truncateContent(note.content, 30)
+              )}
+            </p>
+          </CardContent>
+
+          <CardFooter className="p-2">
+            <p className="text-gray-500 text-sm">
+              {new Date(note.createdAt).toLocaleDateString()}
+            </p>
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
+  );
 };
 
 export default HomePage;
