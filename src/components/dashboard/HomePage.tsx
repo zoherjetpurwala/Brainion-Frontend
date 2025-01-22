@@ -28,6 +28,13 @@ const truncateContent = (content: string, wordLimit: number): string => {
   return content;
 };
 
+const getWordsCount = (content: string): number => {
+  const words = content.split(" ");
+  console.log(words.length);
+  
+  return words.length;
+}
+
 const HomePage: React.FC = () => {
   const { user } = useUser();
   const [notes, setNotes] = useState<Note[]>([]);
@@ -82,7 +89,7 @@ const HomePage: React.FC = () => {
       {notes.map((note) => (
         <Card
           className={`${
-            note.type === "DOCUMENT" ? "col-span-1 row-span-2" : ""
+            getWordsCount(note.content) > 15 ? "col-span-1 row-span-2" : ""
           } p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
         >
           <CardHeader className="p-2 border-b">
