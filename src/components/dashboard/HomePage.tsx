@@ -91,9 +91,9 @@ const HomePage: React.FC = () => {
         const dynamicClass =
           note.type === "NOTE"
             ? wordCount > 50
-              ? "col-span-2 row-span-2"
+              ? "md:col-span-2 md:row-span-2"
               : wordCount > 25
-              ? "row-span-2"
+              ? "md:row-span-2"
               : ""
             : "col-span-1 row-span-1";
         return (
@@ -102,7 +102,7 @@ const HomePage: React.FC = () => {
           >
             <CardHeader className="p-2 border-b">
               <CardTitle className="flex justify-between items-center p-0">
-                <h1 className="text-lg font-semibold text-primary truncate">
+                <h1 className="text-lg font-semibold text-primary">
                   {note.title}
                 </h1>
                 <div className="flex gap-1 items-center">
@@ -111,9 +111,8 @@ const HomePage: React.FC = () => {
                   </Badge>
                   <Trash2
                     onClick={() => handleDelete(note.id)}
-                    className="w-4 h-4 text-red-600 cursor-pointer"
+                    className="w-4 h-4 text-gray-600 cursor-pointer"
                   />
-                  {getWordsCount(note.content)}
                 </div>
               </CardTitle>
             </CardHeader>
