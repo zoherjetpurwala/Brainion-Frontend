@@ -29,10 +29,7 @@ const truncateContent = (content: string, wordLimit: number): string => {
 };
 
 const getWordsCount = (content: string): number => {
-  const words = content.split(" ");
-  console.log(words.length);
-
-  return words.length;
+  return content.split(" ").length;
 };
 
 const HomePage: React.FC = () => {
@@ -98,6 +95,7 @@ const HomePage: React.FC = () => {
             : "col-span-1 row-span-1";
         return (
           <Card
+            key={note.id}
             className={`${dynamicClass} p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
           >
             <CardHeader className="p-2 border-b">
@@ -118,23 +116,27 @@ const HomePage: React.FC = () => {
             </CardHeader>
 
             <CardContent className="p-2 flex-auto overflow-hidden border-b">
-              <p
-                className={`text-gray-800 line-clamp-3 ${
-                  note.type === "DOCUMENT"
-                    ? "flex h-full justify-center items-center"
-                    : ""
-                }`}
-              >
-                {note.type === "DOCUMENT" ? (
-                  getExtensionFromURL(note.url) === "pdf" ? (
-                    <img src="/pdf-document.svg" className="w-12 h-12" />
+              {note.type === "DOCUMENT" ? (
+                <div className="flex h-full justify-center items-center">
+                  {getExtensionFromURL(note.url) === "pdf" ? (
+                    <img
+                      src="/pdf-document.svg"
+                      className="w-12 h-12"
+                      alt="PDF Icon"
+                    />
                   ) : (
                     <Share2 />
-                  )
-                ) : (
-                  truncateContent(note.content, 50)
-                )}
-              </p>
+                  )}
+                </div>
+              ) : (
+                <p className="text-gray-800">
+                  {dynamicClass.includes("md:col-span-2")
+                    ? truncateContent(note.content, 150)
+                    : dynamicClass.includes("md:row-span-2")
+                    ? truncateContent(note.content, 75)
+                    : truncateContent(note.content, 50)}
+                </p>
+              )}
             </CardContent>
 
             <CardFooter className="p-2">
