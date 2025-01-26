@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
-import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
 import axios from "axios";
 import { motion } from "framer-motion";
 import useFetchContent from "../../hooks/useFetchContent";
@@ -42,36 +45,52 @@ const DashboardPage = () => {
   return (
     <div className="p-4 space-y-8">
       <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
-        <Card className="md:col-span-2 p-2 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out">
-          <CardHeader>
-            <h2 className="text-2xl font-bold">Daily Quote</h2>
+        <Card
+          className={`md:col-span-2 p-2 flex flex-col justify-between border border-blue-800/25 bg-white shadow-inner shadow-blue-800/25 rounded-md transition-all duration-500 ease-in-out`}
+        >
+          <CardHeader className="p-2 border-b">
+            <CardTitle className="flex justify-between items-center p-0">
+              <h1 className="text-lg font-semibold text-primary">
+                Daily Quote
+              </h1>
+            </CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="text-lg italic">"{dailyQuote}"</p>
+
+          <CardContent className="p-2 flex-auto overflow-hidden h-20">
+            <div className="flex h-full items-center text-xl">
+              <p className="text-gray-800">{dailyQuote}</p>
+            </div>
           </CardContent>
         </Card>
 
-        {/* Notes Count */}
-        <Card className="lg:row-span-1 p-2 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out">
-        <CardHeader>
-            <h2 className="text-2xl font-bold">Your Notes</h2>
+        <Card
+          className={`lg:row-span-1 p-2 flex flex-col justify-between border border-blue-800/25 bg-white shadow-inner shadow-blue-800/25 rounded-md transition-all duration-500 ease-in-out`}
+        >
+          <CardHeader className="p-2 border-b">
+            <CardTitle className="flex justify-between items-center p-0">
+              <h1 className="text-lg font-semibold text-primary">Your Notes</h1>
+            </CardTitle>
           </CardHeader>
-          <CardContent className="flex justify-between items-center">
-            <div>
-              <p className="text-gray-600">
+
+          <CardContent className="p-2 flex-auto overflow-hidden h-20">
+            <div className="flex h-fullitems-center">
+              <p className="text-gray-800">
                 You have created <b>{content.length}</b> notes so far.
               </p>
             </div>
-            <Link to="/notes">
-              <Button>View Notes</Button>
-            </Link>
           </CardContent>
         </Card>
 
         {/* Schedule */}
-        <Card className="lg:row-span-2 p-2 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out">
-          <CardContent>
-            <h2 className="text-2xl font-bold">Upcoming Events</h2>
+        <Card className="lg:row-span-2 p-2 flex flex-col justify-between border border-blue-800/25 bg-white shadow-inner shadow-blue-800/25 rounded-md transition-all duration-500 ease-in-out">
+          <CardHeader className="p-2 border-b">
+            <CardTitle className="flex justify-between items-center p-0">
+              <h1 className="text-lg font-semibold text-primary">
+                Upcoming Events
+              </h1>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-2 flex-auto overflow-hidden">
             {events.length > 0 ? (
               <ul className="mt-4 space-y-2">
                 {events.map((event) => (
@@ -96,8 +115,25 @@ const DashboardPage = () => {
             )}
           </CardContent>
         </Card>
+
+        <Card
+          className={`lg:row-span-1 p-2 flex flex-col justify-between border border-blue-800/25 bg-white shadow-inner shadow-blue-800/25 rounded-md transition-all duration-500 ease-in-out`}
+        >
+          <CardHeader className="p-2 border-b">
+            <CardTitle className="flex justify-between items-center p-0">
+              <h1 className="text-lg font-semibold text-primary">Your Notes</h1>
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent className="p-2 flex-auto overflow-hidden h-20">
+            <div className="flex h-fullitems-center">
+              <p className="text-gray-800">
+                You have created <b>{content.length}</b> notes so far.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-      {/* Daily Quote */}
     </div>
   );
 };

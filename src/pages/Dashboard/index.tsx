@@ -6,6 +6,7 @@ import Sidebar from "../../components/Sidebar";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import SearchbarOverlay from "../../components/SearchbarOverlay";
 import DashboardPage from "../../components/dashboard/DashboardPage";
+import UploadDialog from "../../components/UploadDialog";
 
 const Dashboard: React.FC = () => {
   const { loading } = useUser();
@@ -62,7 +63,7 @@ const Dashboard: React.FC = () => {
         toggleSidebar={toggleSidebar}
       />
 
-      <div className="flex-1 lg:pl-64 flex flex-col w-full bg-gray-50 transition-all duration-300">
+      <div className="flex-1 lg:pl-64 flex flex-col w-full bg-white transition-all duration-300">
         {/* Navbar */}
         <DashboardNavbar
           toggleSidebar={toggleSidebar}
@@ -72,11 +73,11 @@ const Dashboard: React.FC = () => {
         />
 
         {/* Main Content */}
-        <main className="mt-20">
+        <main className="mt-24">
           <Routes>
             <Route path="/" element={<DashboardPage/>} />
             <Route path="/ideas" element={<IdeasPage />} />
-            <Route path="/profile" element={<div>Profile Page</div>} />
+            <Route path="/profile" element={<UploadDialog/>} />
             <Route path="/settings" element={<div>Settings Page</div>} />
             <Route
               path="*"

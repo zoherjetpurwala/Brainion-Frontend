@@ -69,7 +69,7 @@ const IdeasPage: React.FC = () => {
           <ToggleGroupItem
             value="ALL"
             aria-label="Toggle all"
-            className="data-[state=on]:bg-blue-950/50 data-[state=on]:text-white"
+            className="data-[state=on]:bg-blue-700/50 data-[state=on]:text-white"
           >
             <span className="flex px-4">
               <LayoutGrid className="h-4 w-4 mr-2" />
@@ -79,7 +79,7 @@ const IdeasPage: React.FC = () => {
           <ToggleGroupItem
             value="NOTE"
             aria-label="Toggle notes"
-            className="data-[state=on]:bg-blue-950/50 data-[state=on]:text-white"
+            className="data-[state=on]:bg-blue-700/50 data-[state=on]:text-white"
           >
             <span className="flex px-4">
               <StickyNote className="h-4 w-4 mr-2" />
@@ -89,7 +89,7 @@ const IdeasPage: React.FC = () => {
           <ToggleGroupItem
             value="DOCUMENT"
             aria-label="Toggle documents"
-            className="data-[state=on]:bg-blue-950/50 data-[state=on]:text-white"
+            className="data-[state=on]:bg-blue-700/50 data-[state=on]:text-white"
           >
             <span className="flex px-4">
               <FileText className="h-4 w-4 mr-2" />
@@ -101,7 +101,7 @@ const IdeasPage: React.FC = () => {
 
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="grid grid-flow-dense auto-rows-auto grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-6">
+      <div className="grid grid-cols-4 gap-6">
         {filteredContent.map((note) => {
           const wordCount = getWordsCount(note.content);
           const dynamicClass =
@@ -115,7 +115,7 @@ const IdeasPage: React.FC = () => {
           return (
             <Card
               key={note.id}
-              className={`${dynamicClass} p-4 flex flex-col justify-between ring-1 ring-blue-800/25 bg-white shadow-md shadow-blue-800/15 rounded-2xl transition-all duration-500 ease-in-out`}
+              className={`${dynamicClass} p-4 flex flex-col justify-between border border-blue-800/25 bg-white shadow-inner rounded-lg transition-all duration-500 ease-in-out`}
             >
               <CardHeader className="p-2 border-b">
                 <CardTitle className="flex justify-between items-center p-0">

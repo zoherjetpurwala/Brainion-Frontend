@@ -45,7 +45,7 @@ const NavigationBar = () => {
       <div className="flex gap-2 justify-between items-center w-full md:gap-px">
         <a
           href="/"
-          className="select-none text-blue-900 flex items-center text-2xl font-medium font-sans transition-all py-1.5 flex-none px-3 ml-1"
+          className="select-none text-blue-900 flex items-center text-2xl font-medium ubuntu-medium transition-all py-1.5 flex-none px-3 ml-1"
         >
           Brainion.
         </a>

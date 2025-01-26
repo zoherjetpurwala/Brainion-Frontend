@@ -17,8 +17,8 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
 }) => {
   const { user, logout } = useUser();
   return (
-    <div className="w-full sm:w-[calc(100%-18rem)] fixed backdrop-blur-3xl rounded-r-2xl border border-blue-950/25 p-3 flex justify-between items-center md:ml-64 shadow-sm shadow-blue-800/25 md:right-4 md:top-3 mr-3 sm:mx-auto rounded-2xl max-sm:mx-[0.5rem] max-sm:top-3 max-sm:max-w-[calc(100%-1rem)]">
-      <div className="flex items-center">
+    <div className="w-full lg:w-[calc(100%-16rem)] fixed bg-white border-b border-gray-200 py-4 px-4 flex justify-between items-center h-24">
+            <div className="flex items-center">
         <button
           onClick={toggleSidebar}
           className="lg:hidden mr-4 focus:outline-none"
@@ -30,14 +30,14 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
             <Menu className="h-6 w-6" />
           )}
         </button>
-        <h1 className="text-2xl font-normal">{activeContent}</h1>
+        <h1 className="text-2xl font-semibold text-blue-950">{activeContent}</h1>
       </div>
-      <div className="flex items-center w-full justify-end gap-2">
+      <div className="flex items-center w-full justify-end gap-3">
         <button
           onClick={() => {
             console.log("THIS WORKS");
           }}
-          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-full border-blue-800/25 bg-white shadow-md shadow-blue-800/25"
+          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-md border-blue-800/25 bg-white shadow-md shadow-blue-800/25"
         >
           <span className="flex gap-2">
             <PlusCircleIcon className="h-6 w-6 text-blue-700" />
@@ -46,7 +46,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
         </button>
         <button
           onClick={toggleSearchBar}
-          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-full border-blue-800/25 bg-white shadow-md shadow-blue-800/25"
+          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-md border-blue-800/25 bg-white shadow-md shadow-blue-800/25"
         >
           <span className="flex gap-2">
             <SearchIcon className="h-6 w-6 text-blue-700" />
