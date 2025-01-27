@@ -47,11 +47,22 @@ const useFetchContent = (userId: string | undefined) => {
     }
   };
 
+  const getCountByType = (type: string) => {
+    return content.filter((item) => item.type === type).length;
+  };
+
   useEffect(() => {
     fetchData();
   }, [userId]);
 
-  return { content, filteredContent, loading, error, filterContentByType };
+  return {
+    content,
+    filteredContent,
+    loading,
+    error,
+    filterContentByType,
+    getCountByType,
+  };
 };
 
 export default useFetchContent;

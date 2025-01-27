@@ -21,10 +21,6 @@ const truncateContent = (content: string, wordLimit: number): string => {
   return content;
 };
 
-const getWordsCount = (content: string): number => {
-  return content.split(" ").length;
-};
-
 const IdeasPage: React.FC = () => {
   const { user } = useUser();
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
@@ -101,71 +97,56 @@ const IdeasPage: React.FC = () => {
 
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="grid grid-cols-4 gap-6">
-        {filteredContent.map((note) => {
-          const wordCount = getWordsCount(note.content);
-          const dynamicClass =
-            note.type === "NOTE"
-              ? wordCount > 50
-                ? "md:col-span-2 md:row-span-2"
-                : wordCount > 25
-                ? "md:row-span-2"
-                : ""
-              : "col-span-1 row-span-1";
-          return (
-            <Card
-              key={note.id}
-              className={`${dynamicClass} p-4 flex flex-col justify-between border border-blue-800/25 bg-white shadow-inner rounded-lg transition-all duration-500 ease-in-out`}
-            >
-              <CardHeader className="p-2 border-b">
-                <CardTitle className="flex justify-between items-center p-0">
-                  <h1 className="text-lg font-semibold text-primary">
-                    {note.title}
-                  </h1>
-                  <div className="flex gap-1 items-center">
-                    <Badge className="border border-blue-800/25 rounded-full">
-                      {note.type}
-                    </Badge>
-                    <Trash2
-                      onClick={() => handleDelete(note.id)}
-                      className="w-4 h-4 text-gray-600 cursor-pointer"
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+        {filteredContent.map((note) => (
+          <Card
+            key={note.id}
+            className={`p-4 flex flex-col justify-between border border-blue-800/25 bg-white rounded-md transition-all duration-500 ease-in-out`}
+          >
+            <CardHeader className="p-2 border-b">
+              <CardTitle className="flex justify-between items-center p-0">
+                <h1 className="text-lg font-semibold text-primary truncate">
+                  {note.title}
+                </h1>
+                <div className="flex gap-1 items-center">
+                  <Trash2
+                    onClick={() => handleDelete(note.id)}
+                    className="w-4 h-4 text-gray-600 cursor-pointer"
+                  />
+                </div>
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent className="p-2 flex-auto overflow-hidden border-b">
+              {note.type === "DOCUMENT" ? (
+                <div className="flex h-full justify-center items-center">
+                  {getExtensionFromURL(note.url) === "pdf" ? (
+                    <img
+                      src="/pdf-document.svg"
+                      className="w-12 h-12"
+                      alt="PDF Icon"
                     />
-                  </div>
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="p-2 flex-auto overflow-hidden border-b">
-                {note.type === "DOCUMENT" ? (
-                  <div className="flex h-full justify-center items-center">
-                    {getExtensionFromURL(note.url) === "pdf" ? (
-                      <img
-                        src="/pdf-document.svg"
-                        className="w-12 h-12"
-                        alt="PDF Icon"
-                      />
-                    ) : (
-                      <Share2 />
-                    )}
-                  </div>
-                ) : (
-                  <p className="text-gray-800">
-                    {dynamicClass.includes("md:col-span-2")
-                      ? truncateContent(note.content, 150)
-                      : dynamicClass.includes("md:row-span-2")
-                      ? truncateContent(note.content, 75)
-                      : truncateContent(note.content, 50)}
-                  </p>
-                )}
-              </CardContent>
-
-              <CardFooter className="p-2">
-                <p className="text-gray-500 text-sm">
-                  {new Date(note.createdAt).toLocaleDateString()}
+                  ) : (
+                    <Share2 />
+                  )}
+                </div>
+              ) : (
+                <p className="text-gray-800 line-clamp-4">
+                  {truncateContent(note.content, 50)}
                 </p>
-              </CardFooter>
-            </Card>
-          );
-        })}
+              )}
+            </CardContent>
+
+            <CardFooter className="p-2 flex justify-between">
+              <p className="text-gray-500 text-sm">
+                {new Date(note.createdAt).toLocaleDateString()}
+              </p>
+              <Badge className="border border-blue-800/25 rounded-full">
+                {note.type}
+              </Badge>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
     </div>
   );
