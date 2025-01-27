@@ -127,7 +127,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Schedule */}
-        <Card className="lg:row-span-3 p-2 flex flex-col justify-between border border-blue-800/25 bg-white rounded-md transition-all duration-500 ease-in-out">
+        <Card className="lg:row-span-3 p-2 flex flex-col justify-between border border-blue-800/25 bg-white rounded-md transition-all duration-500 ease-in-out max-h-[462px] overflow-y-auto">
           <CardHeader className="p-2 border-b">
             <CardTitle className="flex justify-between items-center p-0">
               <h1 className="text-lg font-semibold text-primary">
@@ -135,7 +135,7 @@ const DashboardPage = () => {
               </h1>
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 flex-auto overflow-hidden">
+          <CardContent className="p-2 flex-auto overflow-y-auto">
             {events.length > 0 ? (
               <ul className="mt-4 space-y-2">
                 {events.map((event) => (

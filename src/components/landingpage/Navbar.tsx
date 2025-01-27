@@ -31,15 +31,15 @@ const NavigationBar = () => {
   }, []);
 
   const handleLogin = () => {
-    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/google`;
+    window.location.href = `${
+      import.meta.env.VITE_BACKEND_URL
+    }/api/v1/auth/google`;
   };
 
   return (
     <nav
-      className={`flex flex-col justify-center w-full md:max-w-xl items-end fixed top-0 inset-x-0 z-50 flex-none p-2 h-16 md:my-2 md:rounded-full border-0 md:border-[1px] border-blue-800/15 backdrop-blur-3xl md:top-6 md:left-1/2 right-auto md:-translate-x-1/2 text-primary bg-white/50 scroll transition-all duration-300 ${
-        isScrolled
-          ? "shadow-xl shadow-blue-800/15 border-none max-sm:rounded-full max-sm:mx-[0.5rem] max-sm:top-6 max-sm:max-w-[calc(100%-1rem)]"
-          : ""
+      className={`fixed top-3 md:top-6 inset-x-0 z-50 flex w-full max-w-xl items-center justify-between p-2 h-16 rounded-full border border-blue-800/15 bg-white/50 backdrop-blur-3xl shadow-md transition-all duration-300 left-1/2 -translate-x-1/2 ${
+        isScrolled ? "shadow-xl shadow-blue-800/15 border-none" : ""
       }`}
     >
       <div className="flex gap-2 justify-between items-center w-full md:gap-px">
