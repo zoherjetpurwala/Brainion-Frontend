@@ -8,7 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Share2, Trash2, FileText, StickyNote, LayoutGrid } from "lucide-react";
+import {
+  Share2,
+  Trash2,
+  FileText,
+  StickyNote,
+  LayoutGrid,
+  LucideLink,
+} from "lucide-react";
 import { Badge } from "../ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import useFetchContent from "../../hooks/useFetchContent";
@@ -108,7 +115,20 @@ const IdeasPage: React.FC = () => {
                 <h1 className="text-lg font-semibold text-primary truncate">
                   {note.title}
                 </h1>
-                <div className="flex gap-1 items-center">
+                <div className="flex gap-2 items-center">
+                  {note.type === "DOCUMENT" && (
+                    <div>
+                      <div>
+                        <a
+                          href={`${note.url}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <LucideLink className="w-4 h-4 text-gray-600 cursor-pointer" />
+                        </a>
+                      </div>
+                    </div>
+                  )}
                   <Trash2
                     onClick={() => handleDelete(note.id)}
                     className="w-4 h-4 text-gray-600 cursor-pointer"
