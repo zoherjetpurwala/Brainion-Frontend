@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useUser } from "../context/UserContext";
 import axios from "axios";
 import { ChevronDownCircle, ChevronUpCircle, Search, SearchIcon, X } from "lucide-react";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "./AILoadingAnimation";
 
 type SearchbarProps = {
   isSearchOpen: boolean;

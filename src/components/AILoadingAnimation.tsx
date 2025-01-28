@@ -1,5 +1,5 @@
 
-const LoadingAnimation = () => {
+const AILoadingAnimation = () => {
   return (
     <div className="loading-container">
       <div className="loading-shape w-12 h-12"></div>
@@ -7,4 +7,4 @@ const LoadingAnimation = () => {
   );
 };
 
-export default LoadingAnimation;
+export default AILoadingAnimation;
