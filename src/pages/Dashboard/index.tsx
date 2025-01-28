@@ -74,14 +74,35 @@ const Dashboard: React.FC = () => {
         {/* Main Content */}
         <main className="mt-24">
           <Routes>
-            <Route path="/" element={<DashboardPage/>} />
+            <Route path="/" element={<DashboardPage />} />
             <Route path="/ideas" element={<IdeasPage />} />
-            <Route path="/profile" element={<div>Profile Page</div>} />
-            <Route path="/settings" element={<div>Settings Page</div>} />
             <Route
-              path="*"
-              element={<Navigate to="/dashboard" replace />}
+              path="/profile"
+              element={
+                <div className="flex justify-center items-center">
+                  <div
+                    className="w-[512px] h-[512px] max-sm:w-96 max-sm:h-96 bg-cover bg-center bg-no-repeat rounded-3xl"
+                    style={{
+                      backgroundImage: "url('/comingsoon.svg')",
+                    }}
+                  ></div>
+                </div>
+              }
             />
+            <Route
+              path="/settings"
+              element={
+                <div className="flex justify-center items-center">
+                  <div
+                    className="w-[512px] h-[512px] max-sm:w-96 max-sm:h-96 bg-cover bg-center bg-no-repeat rounded-3xl"
+                    style={{
+                      backgroundImage: "url('/comingsoon.svg')",
+                    }}
+                  ></div>
+                </div>
+              }
+            />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </main>
       </div>
