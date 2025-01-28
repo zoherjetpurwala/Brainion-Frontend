@@ -38,7 +38,7 @@ const NavigationBar = () => {
 
   return (
     <nav
-      className={`fixed top-3 md:top-6 inset-x-0 z-50 flex w-full max-w-xl items-center justify-between p-2 h-16 rounded-full border border-blue-800/15 bg-white/50 backdrop-blur-3xl shadow-md transition-all duration-300 left-1/2 -translate-x-1/2 ${
+      className={`fixed top-3 md:top-6 inset-x-0 z-50 flex max-sm:w-[90%] w-full max-w-xl items-center justify-between p-2 h-16 rounded-full border border-blue-800/15 bg-white/50 backdrop-blur-3xl transition-all duration-300 left-1/2 -translate-x-1/2 ${
         isScrolled ? "shadow-xl shadow-blue-800/15 border-none" : ""
       }`}
     >
