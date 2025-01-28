@@ -15,6 +15,7 @@ import { Label } from "./ui/label";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
 import { toast } from "sonner";
+import { PlusCircleIcon } from "lucide-react";
 
 type NoteFormData = {
   noteTitle: string;
@@ -25,7 +26,10 @@ type DocumentFormData = {
   document: FileList;
 };
 
-const UploadDialog: React.FC = () => {
+const UploadDialog: React.FC<{
+  dialogOpen: boolean;
+  setDialogOpen: (open: boolean) => void;
+}> = ({ dialogOpen, setDialogOpen }) => {
   const {
     register: registerNote,
     handleSubmit: handleNoteSubmit,
@@ -39,7 +43,6 @@ const UploadDialog: React.FC = () => {
   const { user } = useUser();
 
   const [loading, setLoading] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
 
   const onNoteSubmit = async (data: NoteFormData) => {
     setLoading(true);
@@ -102,7 +105,12 @@ const UploadDialog: React.FC = () => {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button>Upload</Button>
+        <button className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-2xl border-blue-800/25 bg-white shadow-none hover:shadow-blue-800/25 hover:shadow-md transition-shadow duration-300">
+          <span className="flex gap-2">
+            <PlusCircleIcon className="h-6 w-6 text-blue-700" />
+            <h1 className="max-sm:hidden">Add Ideas</h1>
+          </span>
+        </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white backdrop-blur-xl shadow-lg rounded-lg p-6 overflow-hidden">
         <DialogTitle className="text-2xl font-bold mb-4 text-blue-950">
@@ -110,12 +118,15 @@ const UploadDialog: React.FC = () => {
         </DialogTitle>
         <Tabs defaultValue="notes" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="notes" className="text-blue-950">
+            <TabsTrigger
+              value="notes"
+              className="text-blue-950 data-[state=active]:bg-blue-300/50"
+            >
               Notes
             </TabsTrigger>
             <TabsTrigger
               value="documents"
-              className="text-blue-950 bg-blue-700/50"
+              className="text-blue-950 data-[state=active]:bg-blue-300/50"
             >
               Document
             </TabsTrigger>

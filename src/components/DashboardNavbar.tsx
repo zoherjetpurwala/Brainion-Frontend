@@ -1,6 +1,7 @@
-import React from "react";
-import { Menu, X, SearchIcon, PlusCircleIcon } from "lucide-react";
+import React, { useState } from "react";
+import { Menu, X, SearchIcon } from "lucide-react";
 import { useUser } from "../context/UserContext";
+import UploadDialog from "./UploadDialog";
 
 type NavbarProps = {
   toggleSidebar: () => void;
@@ -15,6 +16,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
   isSidebarOpen,
   activeContent,
 }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { user, logout } = useUser();
   return (
     <div className="w-full lg:w-[calc(100%-16rem)] fixed bg-white border-b border-gray-200 py-4 px-4 flex justify-between items-center h-24">
@@ -33,20 +35,10 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
         <h1 className="text-2xl font-semibold text-blue-950">{activeContent}</h1>
       </div>
       <div className="flex items-center w-full justify-end gap-3">
-        <button
-          onClick={() => {
-            console.log("THIS WORKS");
-          }}
-          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-md border-blue-800/25 bg-white shadow-md shadow-blue-800/25"
-        >
-          <span className="flex gap-2">
-            <PlusCircleIcon className="h-6 w-6 text-blue-700" />
-            <h1 className="max-sm:hidden">Add Ideas</h1>
-          </span>
-        </button>
+        <UploadDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
         <button
           onClick={toggleSearchBar}
-          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-md border-blue-800/25 bg-white shadow-md shadow-blue-800/25"
+          className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-2xl border-blue-800/25 bg-white shadow-none hover:shadow-blue-800/25 hover:shadow-md transition-shadow duration-300"
         >
           <span className="flex gap-2">
             <SearchIcon className="h-6 w-6 text-blue-700" />
@@ -59,7 +51,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
             src={user.avatar}
             alt="Profile"
             onClick={logout}
-            className="w-12 h-12 rounded-full border border-blue-800/25 shadow-md shadow-blue-800/25"
+            className="w-12 h-12 rounded-full border border-blue-800/25 shadow-none hover:shadow-blue-800/25 hover:shadow-md transition-shadow duration-300"
           />
         )}
       </div>

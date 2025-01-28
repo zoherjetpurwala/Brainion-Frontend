@@ -101,7 +101,7 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
                   />
                   <input
                     type="search"
-                    className="w-full ring-blue-800/10 shadow-md shadow-blue-800/15 rounded-2xl border border-gray-300 bg-white  py-3 pl-10 pr-4 text-sm text-gray-900 ring-0 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="w-full ring-blue-800/10 shadow-md shadow-blue-800/15 rounded-xl border border-gray-300 bg-white  py-3 pl-10 pr-4 text-sm text-gray-900 ring-0 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     placeholder="Search for anything..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
@@ -111,7 +111,7 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
 
                 <button
                   type="submit"
-                  className="p-3 border-[1px] border-blue-800/10 shadow-md shadow-blue-800/15 text-2xl rounded-2xl text-gray-600 bg-white hover:text-gray-800 transition-colors"
+                  className="p-3 border-[1px] border-blue-800/10 shadow-md shadow-blue-800/15 text-2xl rounded-xl text-gray-600 bg-white hover:text-gray-800 transition-colors"
                   aria-label="Close search"
                 >
                   <SearchIcon className="w-4 h-4" />
@@ -125,7 +125,7 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
                     setResults([]);
                     setAnswer(null);
                   }}
-                  className="p-3 ring-[1px] ring-blue-800/10 shadow-md shadow-blue-800/15 text-2xl rounded-2xl text-gray-600 bg-white hover:text-gray-800 transition-colors"
+                  className="p-3 ring-[1px] ring-blue-800/10 shadow-md shadow-blue-800/15 text-2xl rounded-xl text-gray-600 bg-white hover:text-gray-800 transition-colors"
                   aria-label="Close search"
                 >
                   <X className="w-4 h-4" />

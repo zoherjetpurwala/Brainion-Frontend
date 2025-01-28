@@ -6,7 +6,6 @@ import Sidebar from "../../components/Sidebar";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import SearchbarOverlay from "../../components/SearchbarOverlay";
 import DashboardPage from "../../components/dashboard/DashboardPage";
-import UploadDialog from "../../components/UploadDialog";
 
 const Dashboard: React.FC = () => {
   const { loading } = useUser();
@@ -77,7 +76,7 @@ const Dashboard: React.FC = () => {
           <Routes>
             <Route path="/" element={<DashboardPage/>} />
             <Route path="/ideas" element={<IdeasPage />} />
-            <Route path="/profile" element={<UploadDialog/>} />
+            <Route path="/profile" element={<div>Profile Page</div>} />
             <Route path="/settings" element={<div>Settings Page</div>} />
             <Route
               path="*"
