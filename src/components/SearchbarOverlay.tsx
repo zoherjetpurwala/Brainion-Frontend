@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUser } from "../context/UserContext";
 import axios from "axios";
-import { ChevronDownCircle, ChevronUpCircle, Search, SearchIcon, X } from "lucide-react";
+import {
+  ChevronDownCircle,
+  ChevronUpCircle,
+  Search,
+  SearchIcon,
+  X,
+} from "lucide-react";
 import LoadingAnimation from "./AILoadingAnimation";
 
 type SearchbarProps = {
@@ -13,7 +19,6 @@ type SearchbarProps = {
 const SearchbarOverlay: React.FC<SearchbarProps> = ({
   isSearchOpen,
   toggleSearchBar,
-
 }) => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -41,14 +46,11 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
 
     try {
       const userId = user.id;
-      const contentType = "NOTE";
-
-      const response = await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/notes`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/search`,
         {
           query: searchQuery,
           userId,
-          contentType,
         }
       );
 
