@@ -16,15 +16,7 @@ const DashboardPage = () => {
   const { getCountByType } = useFetchContent(user?.id);
 
   const events = [
-    { id: 1, title: "Team Meeting", time: "10:00 AM", date: "2025-01-26" },
-    { id: 2, title: "Project Deadline", time: "5:00 PM", date: "2025-01-27" },
-    { id: 3, title: "Client Call", time: "3:00 PM", date: "2025-01-28" },
-    {
-      id: 4,
-      title: "Webinar: React Best Practices",
-      time: "11:00 AM",
-      date: "2025-01-29",
-    },
+    { id: 1, title: "Coming Soon", time: "10:00 AM", date: "2025-01-26" },
   ];
 
   useEffect(() => {
@@ -131,7 +123,7 @@ const DashboardPage = () => {
           <CardHeader className="p-2 border-b">
             <CardTitle className="flex justify-between items-center p-0">
               <h1 className="text-lg font-semibold text-primary">
-                Upcoming Events
+                Upcoming Events (WIP)
               </h1>
             </CardTitle>
           </CardHeader>
