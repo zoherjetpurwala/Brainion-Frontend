@@ -19,7 +19,6 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { user, logout } = useUserStore();
-  const { fetchData} = useFetchContent(user?.id);
   return (
     <div className="w-full lg:w-[calc(100%-16rem)] fixed bg-white border-b border-gray-200 py-4 px-4 flex justify-between items-center h-24">
             <div className="flex items-center">
@@ -37,7 +36,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
         <h1 className="text-2xl font-semibold text-blue-950">{activeContent}</h1>
       </div>
       <div className="flex items-center w-full justify-end gap-3">
-        <UploadDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} fetchData={fetchData} />
+        <UploadDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
         <button
           onClick={toggleSearchBar}
           className="h-12 max-sm:w-12 md:py-2 md:px-4 flex justify-center items-center border rounded-2xl border-blue-800/25 bg-white shadow-none hover:shadow-blue-800/25 hover:shadow-md transition-shadow duration-300"

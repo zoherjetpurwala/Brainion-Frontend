@@ -30,8 +30,7 @@ type DocumentFormData = {
 const UploadDialog: React.FC<{
   dialogOpen: boolean;
   setDialogOpen: (open: boolean) => void;
-  fetchData: () => void;
-}> = ({ dialogOpen, setDialogOpen, fetchData }) => {
+}> = ({ dialogOpen, setDialogOpen }) => {
   const {
     register: registerNote,
     handleSubmit: handleNoteSubmit,
@@ -64,7 +63,7 @@ const UploadDialog: React.FC<{
       );
 
       toast.success("Note uploaded successfully!");
-      useContentStore.getState().triggerUpdate(); // Notify IdeasPage
+      useContentStore.getState().triggerUpdate();
       resetNoteForm();
       setDialogOpen(false);
     } catch (error: any) {
@@ -93,6 +92,7 @@ const UploadDialog: React.FC<{
       );
 
       toast.success("Document uploaded successfully!");
+      useContentStore.getState().triggerUpdate();
       resetDocumentForm();
       setDialogOpen(false);
     } catch (error: any) {
