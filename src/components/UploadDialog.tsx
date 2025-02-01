@@ -16,6 +16,7 @@ import axios from "axios";
 import { useUser } from "../context/UserContext";
 import { toast } from "sonner";
 import { PlusCircleIcon } from "lucide-react";
+import { useContentStore } from "../store/useContentStore";
 
 type NoteFormData = {
   noteTitle: string;
@@ -29,7 +30,8 @@ type DocumentFormData = {
 const UploadDialog: React.FC<{
   dialogOpen: boolean;
   setDialogOpen: (open: boolean) => void;
-}> = ({ dialogOpen, setDialogOpen }) => {
+  fetchData: () => void;
+}> = ({ dialogOpen, setDialogOpen, fetchData }) => {
   const {
     register: registerNote,
     handleSubmit: handleNoteSubmit,
@@ -41,7 +43,6 @@ const UploadDialog: React.FC<{
     reset: resetDocumentForm,
   } = useForm<DocumentFormData>();
   const { user } = useUser();
-
   const [loading, setLoading] = useState(false);
 
   const onNoteSubmit = async (data: NoteFormData) => {
@@ -63,6 +64,7 @@ const UploadDialog: React.FC<{
       );
 
       toast.success("Note uploaded successfully!");
+      useContentStore.getState().triggerUpdate(); // Notify IdeasPage
       resetNoteForm();
       setDialogOpen(false);
     } catch (error: any) {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
 import {
   Card,
@@ -19,6 +19,7 @@ import {
 import { Badge } from "../ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import useFetchContent from "../../hooks/useFetchContent";
+import { useContentStore } from "../../store/useContentStore";
 
 const truncateContent = (content: string, wordLimit: number): string => {
   const words = content.split(" ");
@@ -31,21 +32,29 @@ const truncateContent = (content: string, wordLimit: number): string => {
 const IdeasPage: React.FC = () => {
   const { user } = useUser();
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
-  const { filteredContent, loading, error, filterContentByType } =
+  const { contentUpdated } = useContentStore();
+  const { filteredContent, loading, error, filterContentByType, fetchData } =
     useFetchContent(user?.id);
 
-  const handleDelete = async (id: string) => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/content/${id}`,
-        {
+    useEffect(() => {
+      if (contentUpdated) {
+        fetchData();
+        useContentStore.setState({ contentUpdated: false });
+      }
+    }, [contentUpdated]);
+    
+
+    const handleDelete = async (id: string) => {
+      try {
+        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/notes/${id}`, {
           withCredentials: true,
-        }
-      );
-    } catch (error) {
-      console.error("Error deleting content:", error);
-    }
-  };
+        });
+        fetchData();
+      } catch (error) {
+        console.error("Error deleting content:", error);
+      }
+    };
+    
 
   const handleFilterChange = (filter: string) => {
     if (filter) {

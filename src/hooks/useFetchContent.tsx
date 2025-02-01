@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 interface Content {
@@ -16,7 +16,7 @@ const useFetchContent = (userId: string | undefined) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!userId) return;
 
     setLoading(true);
@@ -30,14 +30,15 @@ const useFetchContent = (userId: string | undefined) => {
           withCredentials: true,
         }
       );
+
       setContent(response.data);
-      setFilteredContent(response.data); // Default to show all content initially
+      setFilteredContent(response.data);
     } catch (err) {
       setError("Failed to fetch content");
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   const filterContentByType = (type: string) => {
     if (type === "ALL") {
@@ -62,6 +63,7 @@ const useFetchContent = (userId: string | undefined) => {
     error,
     filterContentByType,
     getCountByType,
+    fetchData,
   };
 };
 
