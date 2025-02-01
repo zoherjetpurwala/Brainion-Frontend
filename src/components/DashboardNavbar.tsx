@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Menu, X, SearchIcon } from "lucide-react";
-import { useUser } from "../context/UserContext";
 import UploadDialog from "./UploadDialog";
 import useFetchContent from "../hooks/useFetchContent";
+import { useUserStore } from "../store/useUserStore";
 
 type NavbarProps = {
   toggleSidebar: () => void;
@@ -18,7 +18,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
   activeContent,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { user, logout } = useUser();
+  const { user, logout } = useUserStore();
   const { fetchData} = useFetchContent(user?.id);
   return (
     <div className="w-full lg:w-[calc(100%-16rem)] fixed bg-white border-b border-gray-200 py-4 px-4 flex justify-between items-center h-24">

@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import { UserProvider, useUser } from "./context/UserContext";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import LoadingComponent from "./components/LoadingComponent";
+import { useUserStore } from "./store/useUserStore";
 
 const AppRoutes: React.FC = () => {
-  const { user, loading } = useUser();
+  const { user, loading, fetchUser } = useUserStore();
+
+  useEffect(() => {
+    fetchUser(); // Fetch user on mount
+  }, []);
 
   if (loading) {
     return <LoadingComponent />;
@@ -39,11 +43,9 @@ const AppRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <UserProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </UserProvider>
+    <Router>
+      <AppRoutes />
+    </Router>
   );
 };
 

@@ -13,10 +13,10 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import axios from "axios";
-import { useUser } from "../context/UserContext";
 import { toast } from "sonner";
 import { PlusCircleIcon } from "lucide-react";
 import { useContentStore } from "../store/useContentStore";
+import { useUserStore } from "../store/useUserStore";
 
 type NoteFormData = {
   noteTitle: string;
@@ -42,7 +42,7 @@ const UploadDialog: React.FC<{
     handleSubmit: handleDocumentSubmit,
     reset: resetDocumentForm,
   } = useForm<DocumentFormData>();
-  const { user } = useUser();
+  const { user } = useUserStore();
   const [loading, setLoading] = useState(false);
 
   const onNoteSubmit = async (data: NoteFormData) => {

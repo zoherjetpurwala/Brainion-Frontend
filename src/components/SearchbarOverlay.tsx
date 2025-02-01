@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useUser } from "../context/UserContext";
 import axios from "axios";
 import {
   ChevronDownCircle,
@@ -10,6 +9,7 @@ import {
   X,
 } from "lucide-react";
 import LoadingAnimation from "./AILoadingAnimation";
+import { useUserStore } from "../store/useUserStore";
 
 type SearchbarProps = {
   isSearchOpen: boolean;
@@ -26,7 +26,7 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
   const [results, setResults] = useState<any[]>([]);
   const [answer, setAnswer] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useUser();
+  const { user } = useUserStore();
 
   const handleSearch = async (searchQuery: string) => {
     if (!user?.id) {

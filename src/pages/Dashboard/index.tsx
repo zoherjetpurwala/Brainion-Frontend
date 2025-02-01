@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useUser } from "../../context/UserContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import IdeasPage from "../../components/dashboard/IdeasPage";
 import Sidebar from "../../components/Sidebar";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import SearchbarOverlay from "../../components/SearchbarOverlay";
 import DashboardPage from "../../components/dashboard/DashboardPage";
+import { useUserStore } from "../../store/useUserStore";
 
 const Dashboard: React.FC = () => {
-  const { loading } = useUser();
+  const { loading } = useUserStore();
   const [activeContent, setActiveContent] = useState<string>("Dashboard");
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);

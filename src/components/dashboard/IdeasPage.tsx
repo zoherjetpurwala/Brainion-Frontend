@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useUser } from "../../context/UserContext";
 import {
   Card,
   CardContent,
@@ -20,6 +19,7 @@ import { Badge } from "../ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import useFetchContent from "../../hooks/useFetchContent";
 import { useContentStore } from "../../store/useContentStore";
+import { useUserStore } from "../../store/useUserStore";
 
 const truncateContent = (content: string, wordLimit: number): string => {
   const words = content.split(" ");
@@ -30,7 +30,7 @@ const truncateContent = (content: string, wordLimit: number): string => {
 };
 
 const IdeasPage: React.FC = () => {
-  const { user } = useUser();
+  const { user } = useUserStore();
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const { contentUpdated } = useContentStore();
   const { filteredContent, loading, error, filterContentByType, fetchData } =

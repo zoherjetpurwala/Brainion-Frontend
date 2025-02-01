@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useUser } from "../../context/UserContext";
 import {
   Card,
   CardContent,
@@ -9,9 +8,10 @@ import {
 import axios from "axios";
 import { motion } from "framer-motion";
 import useFetchContent from "../../hooks/useFetchContent";
+import { useUserStore } from "../../store/useUserStore";
 
 const DashboardPage = () => {
-  const { user } = useUser();
+  const { user } = useUserStore();
   const [dailyQuote, setDailyQuote] = useState("");
   const { getCountByType } = useFetchContent(user?.id);
 
