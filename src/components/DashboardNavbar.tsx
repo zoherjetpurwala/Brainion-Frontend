@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Menu, X, SearchIcon } from "lucide-react";
 import UploadDialog from "./UploadDialog";
-import useFetchContent from "../hooks/useFetchContent";
 import { useUserStore } from "../store/useUserStore";
 
 type NavbarProps = {
