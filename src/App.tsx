@@ -14,11 +14,19 @@ const AppRoutes: React.FC = () => {
   const { user, loading, fetchUser } = useUserStore();
 
   useEffect(() => {
-    fetchUser(); // Fetch user on mount
+    fetchUser();
   }, []);
 
   if (loading) {
-    return <LoadingComponent />;
+    return (
+      <div className="flex flex-col h-screen items-center justify-center gap-10">
+        <LoadingComponent />
+        <h1 className="flex flex-col items-center justify-center font-semibold">
+          <span>Rendering patience...</span>
+          <span>Because great things (and servers) take time! ⏳</span>
+        </h1>
+      </div>
+    );
   }
 
   return (

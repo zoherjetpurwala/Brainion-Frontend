@@ -20,6 +20,7 @@ import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import useFetchContent from "../../hooks/useFetchContent";
 import { useContentStore } from "../../store/useContentStore";
 import { useUserStore } from "../../store/useUserStore";
+import LoadingComponent from "../LoadingComponent";
 
 const truncateContent = (content: string, wordLimit: number): string => {
   const words = content.split(" ");
@@ -36,25 +37,26 @@ const IdeasPage: React.FC = () => {
   const { filteredContent, loading, error, filterContentByType, fetchData } =
     useFetchContent(user?.id);
 
-    useEffect(() => {
-      if (contentUpdated) {
-        fetchData();
-        useContentStore.setState({ contentUpdated: false });
-      }
-    }, [contentUpdated]);
-    
+  useEffect(() => {
+    if (contentUpdated) {
+      fetchData();
+      useContentStore.setState({ contentUpdated: false });
+    }
+  }, [contentUpdated]);
 
-    const handleDelete = async (id: string) => {
-      try {
-        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/notes/${id}`, {
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/notes/${id}`,
+        {
           withCredentials: true,
-        });
-        fetchData();
-      } catch (error) {
-        console.error("Error deleting content:", error);
-      }
-    };
-    
+        }
+      );
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting content:", error);
+    }
+  };
 
   const handleFilterChange = (filter: string) => {
     if (filter) {
@@ -111,7 +113,11 @@ const IdeasPage: React.FC = () => {
         </ToggleGroup>
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="flex justify-center items-center">
+          <LoadingComponent />
+        </div>
+      )}
       {error && <p className="text-red-500">{error}</p>}
       <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
         {filteredContent.map((note) => (

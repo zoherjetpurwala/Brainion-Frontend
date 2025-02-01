@@ -9,11 +9,20 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import useFetchContent from "../../hooks/useFetchContent";
 import { useUserStore } from "../../store/useUserStore";
+import { useContentStore } from "../../store/useContentStore";
 
 const DashboardPage = () => {
   const { user } = useUserStore();
+  const { contentUpdated } = useContentStore();
   const [dailyQuote, setDailyQuote] = useState("");
-  const { getCountByType } = useFetchContent(user?.id);
+  const { getCountByType, fetchData } = useFetchContent(user?.id);
+
+  useEffect(() => {
+    if (contentUpdated) {
+      fetchData();
+      useContentStore.setState({ contentUpdated: false });
+    }
+  }, [contentUpdated]);
 
   const events = [
     { id: 1, title: "Coming Soon", time: "10:00 AM", date: "2025-01-26" },
