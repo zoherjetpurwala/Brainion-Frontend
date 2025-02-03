@@ -7,6 +7,7 @@ import {
   Search,
   SearchIcon,
   X,
+  Wand2
 } from "lucide-react";
 import LoadingAnimation from "./AILoadingAnimation";
 import { useUserStore } from "../store/useUserStore";
@@ -26,6 +27,7 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
   const [results, setResults] = useState<any[]>([]);
   const [answer, setAnswer] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [searchMode, setSearchMode] = useState<'ai' | 'normal'>('ai');
   const { user } = useUserStore();
 
   const handleSearch = async (searchQuery: string) => {
@@ -46,24 +48,29 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
 
     try {
       const userId = user.id;
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/search`,
-        {
-          query: searchQuery,
-          userId,
-        }
-      );
+      const endpoint = searchMode === 'ai' 
+        ? `${import.meta.env.VITE_BACKEND_URL}/api/v1/search/ai` 
+        : `${import.meta.env.VITE_BACKEND_URL}/api/v1/search/title`;
 
-      const { title, answer, listOfNotes } = response.data;
+      const response = await axios.post(endpoint, {
+        query: searchQuery,
+        userId,
+      });
 
-      setResults(listOfNotes);
-      setAnswer(`Answer based on your note titled "${title}":\n${answer}`);
+      if (searchMode === 'ai') {
+        const { title, answer, listOfNotes } = response.data;
+        setResults(listOfNotes);
+        setAnswer(`Answer based on your note titled "${title}":\n${answer}`);
+      } else {
+        setResults(response.data.results);
+      }
     } catch (error: any) {
       setError(error.response?.data?.error || "Something went wrong.");
     } finally {
       setSearchLoading(false);
     }
   };
+
   return (
     <AnimatePresence>
       {isSearchOpen && (
@@ -79,7 +86,7 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
         >
           <style>{`
           div::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
           }
         `}</style>
           <motion.div
@@ -103,18 +110,31 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
                   />
                   <input
                     type="search"
-                    className="w-full ring-blue-800/10 shadow-md shadow-blue-800/15 rounded-xl border border-gray-300 bg-white  py-3 pl-10 pr-4 text-sm text-gray-900 ring-0 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    placeholder="Search for anything..."
+                    className="w-full ring-blue-800/10 shadow-md shadow-blue-800/15 rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-4 text-sm text-gray-900 ring-0 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    placeholder={searchMode === 'ai' ? "Ask anything about your notes..." : "Search note titles..."}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    aria-label="Search for anything..."
+                    aria-label="Search input"
                   />
                 </div>
 
                 <button
+                  type="button"
+                  onClick={() => setSearchMode(prev => prev === 'ai' ? 'normal' : 'ai')}
+                  className="p-3 border-[1px] border-blue-800/10 shadow-md shadow-blue-800/15 rounded-xl bg-white hover:bg-gray-50 transition-colors"
+                  title={`Switch to ${searchMode === 'ai' ? 'title' : 'AI'} search`}
+                >
+                  <Wand2 
+                    className={`w-4 h-4 ${
+                      searchMode === 'ai' ? 'text-blue-600' : 'text-gray-400'
+                    }`} 
+                  />
+                </button>
+
+                <button
                   type="submit"
                   className="p-3 border-[1px] border-blue-800/10 shadow-md shadow-blue-800/15 text-2xl rounded-xl text-gray-600 bg-white hover:text-gray-800 transition-colors"
-                  aria-label="Close search"
+                  aria-label="Search"
                 >
                   <SearchIcon className="w-4 h-4" />
                 </button>
@@ -157,19 +177,18 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
                 )}
 
                 <AnimatePresence>
-                  {answer && (
+                  {answer && searchMode === 'ai' && (
                     <motion.div
                       key="answer"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="mt-3 p-4 rounded-2xl shadow-md bg-blue-100  overflow-hidden"
+                      className="mt-3 p-4 rounded-2xl shadow-md bg-blue-100 overflow-hidden"
                     >
                       <div className="flex justify-between">
                         <h2 className="text-2xl font-bold">
                           Brainion's answer
                         </h2>
-
                         <button
                           onClick={() => setIsOpen((prev) => !prev)}
                           className="text-blue-500 hover:text-blue-700"
@@ -206,7 +225,9 @@ const SearchbarOverlay: React.FC<SearchbarProps> = ({
                       exit={{ opacity: 0, y: -20 }}
                       className="mt-3 p-4 bg-white rounded-2xl"
                     >
-                      <h2 className="text-2xl font-bold">Related Notes</h2>
+                      <h2 className="text-2xl font-bold">
+                        {searchMode === 'ai' ? 'Related Notes' : 'Search Results'}
+                      </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                         {results.map((note) => (
                           <motion.div
