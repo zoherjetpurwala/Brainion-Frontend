@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { Menu, X, SearchIcon } from "lucide-react";
 import UploadDialog from "./UploadDialog";
 import { useUserStore } from "../store/useUserStore";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { FaSignOutAlt } from "react-icons/fa";
 
 type NavbarProps = {
   toggleSidebar: () => void;
@@ -20,7 +28,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
   const { user, logout } = useUserStore();
   return (
     <div className="w-full lg:w-[calc(100%-16rem)] fixed bg-white border-b border-gray-200 py-4 px-4 flex justify-between items-center h-24">
-            <div className="flex items-center">
+      <div className="flex items-center">
         <button
           onClick={toggleSidebar}
           className="lg:hidden mr-4 focus:outline-none"
@@ -32,7 +40,9 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
             <Menu className="h-6 w-6" />
           )}
         </button>
-        <h1 className="text-2xl font-semibold text-blue-950">{activeContent}</h1>
+        <h1 className="text-2xl font-semibold text-blue-950">
+          {activeContent}
+        </h1>
       </div>
       <div className="flex items-center w-full justify-end gap-3">
         <UploadDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
@@ -47,12 +57,22 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
         </button>
 
         {user && (
-          <img
-            src={user.avatar}
-            alt="Profile"
-            onClick={logout}
-            className="w-12 h-12 rounded-full border border-blue-800/25 shadow-none hover:shadow-blue-800/25 hover:shadow-md transition-shadow duration-300"
-          />
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <img
+                src={user.avatar}
+                alt="Profile"
+                className="w-12 h-12 rounded-full border border-blue-800/25 shadow-none hover:shadow-blue-800/25 hover:shadow-md transition-shadow duration-300"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-white">
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={logout} className="text-red-500">
+                <FaSignOutAlt />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
       </div>
     </div>

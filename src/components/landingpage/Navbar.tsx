@@ -38,8 +38,8 @@ const NavigationBar = () => {
 
   return (
     <nav
-      className={`fixed top-3 md:top-6 inset-x-0 z-50 flex max-sm:w-[90%] w-full max-w-xl items-center justify-between p-2 h-16 rounded-full border border-blue-800/15 bg-white/50 backdrop-blur-3xl transition-all duration-300 left-1/2 -translate-x-1/2 ${
-        isScrolled ? "shadow-xl shadow-blue-800/15 border-none" : ""
+      className={`fixed top-3 md:top-6 inset-x-0 z-50 flex max-sm:w-[90%] w-full max-w-xl items-center justify-between p-2 h-16 rounded-full border border-blue-800/15 bg-white/50 backdrop-blur-3xl transition-all duration-500 left-1/2 -translate-x-1/2 ${
+        isScrolled ? "shadow-xl shadow-blue-800/25 border-none" : ""
       }`}
     >
       <div className="flex gap-2 justify-between items-center w-full md:gap-px">
@@ -56,7 +56,7 @@ const NavigationBar = () => {
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <Button
-                className={`text-black ring-1 ring-blue-800/5 hover:bg-blue-800/15 font-medium rounded-full px-6 shadow-none transition-all duration-300 ${
+                className={`text-black ring-1 ring-blue-800/5 hover:bg-blue-800/15 font-medium rounded-full px-6 shadow-none transition-all duration-500 ${
                   isScrolled ? "bg-blue-800 hover:bg-blue-950 text-white" : ""
                 }`}
               >
