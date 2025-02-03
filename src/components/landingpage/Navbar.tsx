@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { FaGoogle, FaGithub } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NavigationBar = () => {
@@ -85,13 +85,6 @@ const NavigationBar = () => {
                       >
                         <FaGoogle className="text-xl" />
                         Continue with Google
-                      </Button>
-                      <Button
-                        onClick={handleLogin}
-                        className="w-full flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-md py-2 px-4 transition-all duration-300 ease-in-out shadow-sm hover:shadow-md"
-                      >
-                        <FaGithub className="text-xl" />
-                        Continue with GitHub
                       </Button>
                     </div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-6 text-center">

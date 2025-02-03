@@ -1,7 +1,14 @@
+import { FaGoogle } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 
 const HeroComponent = () => {
+  const handleLogin = () => {
+    window.location.href = `${
+      import.meta.env.VITE_BACKEND_URL
+    }/api/v1/auth/google`;
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, filter: "blur(10px)", y: 0 }}
@@ -30,7 +37,11 @@ const HeroComponent = () => {
 
         {/* Button */}
         <div className="flex flex-col">
-          <Button className="bg-blue-800 hover:bg-blue-950 text-white font-medium rounded-full px-6 py-5">
+          <Button
+            onClick={handleLogin}
+            className="bg-blue-800 hover:bg-blue-950 text-white font-medium rounded-full px-6 py-5"
+          >
+            <FaGoogle className="text-xl" />
             Continue with Google
           </Button>
         </div>
