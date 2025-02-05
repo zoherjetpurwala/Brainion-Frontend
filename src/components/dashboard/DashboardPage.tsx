@@ -32,7 +32,7 @@ const DashboardPage = () => {
     const fetchQuote = async () => {
       try {
         const response = await axios.get(
-          "https://quotes-api-self.vercel.app/quote"
+          `${import.meta.env.VITE_BACKEND_URL}/daily-quote`
         );
         setDailyQuote(response.data.quote);
       } catch (error) {
