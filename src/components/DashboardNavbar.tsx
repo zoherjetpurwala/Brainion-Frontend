@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { FaSignOutAlt } from "react-icons/fa";
+import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 
 type NavbarProps = {
   toggleSidebar: () => void;
@@ -26,6 +27,7 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { user, logout } = useUserStore();
+
   return (
     <div className="w-full lg:w-[calc(100%-16rem)] fixed bg-white border-b border-gray-200 py-4 px-4 flex justify-between items-center h-24">
       <div className="flex items-center">
@@ -66,7 +68,9 @@ const DashboardNavbar: React.FC<NavbarProps> = ({
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-white">
-              <DropdownMenuSeparator />
+              <DropdownMenuLabel className="p-2 border-b-[0.5px] border-gray-200">
+                Hello, {user?.name.split(" ")[0] || user?.name}
+              </DropdownMenuLabel>
               <DropdownMenuItem onClick={logout} className="text-red-500">
                 <FaSignOutAlt />
                 Logout
