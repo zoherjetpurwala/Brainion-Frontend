@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "../ui/card";
 import {
-  Share2,
   Trash2,
   FileText,
   StickyNote,
@@ -21,6 +20,7 @@ import useFetchContent from "../../hooks/useFetchContent";
 import { useContentStore } from "../../store/useContentStore";
 import { useUserStore } from "../../store/useUserStore";
 import LoadingComponent from "../LoadingComponent";
+import TwitterEmbed from "../TweetEmbed";
 
 const truncateContent = (content: string, wordLimit: number): string => {
   const words = content.split(" ");
@@ -28,6 +28,22 @@ const truncateContent = (content: string, wordLimit: number): string => {
     return words.slice(0, wordLimit).join(" ") + "...";
   }
   return content;
+};
+
+const isYouTubeUrl = (url: string): boolean => {
+  return /(?:youtube\.com\/watch\?v=|youtu\.be\/)/.test(url);
+};
+
+const getYouTubeEmbedUrl = (url: string): string => {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : "";
+};
+
+const isTwitterUrl = (url: string) => {
+  return (
+    (url.includes("twitter.com") || url.includes("x.com")) &&
+    url.includes("/status/")
+  );
 };
 
 const IdeasPage: React.FC = () => {
@@ -161,8 +177,28 @@ const IdeasPage: React.FC = () => {
                       className="w-12 h-12"
                       alt="PDF Icon"
                     />
+                  ) : isTwitterUrl(note.url) ? (
+                    <TwitterEmbed tweetUrl={note.url} />
+                  ) : isYouTubeUrl(note.url) ? (
+                    <iframe
+                      width="100%"
+                      height="200"
+                      src={getYouTubeEmbedUrl(note.url) ?? ""}
+                      title="YouTube Video"
+                      frameBorder="0"
+                      allowFullScreen
+                      className="rounded-lg"
+                    />
                   ) : (
-                    <Share2 />
+                    <a
+                      href={note.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline flex items-center"
+                    >
+                      <LucideLink className="w-4 h-4 mr-2" />
+                      {/* {note.url} */}
+                    </a>
                   )}
                 </div>
               ) : (
