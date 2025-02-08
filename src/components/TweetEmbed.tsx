@@ -1,5 +1,5 @@
 import React from "react";
-import { XEmbed } from "react-social-media-embed";
+import { XEmbed } from "./XEmbed";
 
 interface TwitterEmbedProps {
   tweetUrl: string;
@@ -8,7 +8,7 @@ interface TwitterEmbedProps {
 const TwitterEmbed: React.FC<TwitterEmbedProps> = ({ tweetUrl }) => {
   return (
     <div className="flex justify-center">
-      <XEmbed url={`${tweetUrl}`} width={325} />
+      <XEmbed url={`${tweetUrl}`} width={356} />
     </div>
   );
 };

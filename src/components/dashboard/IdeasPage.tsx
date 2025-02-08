@@ -135,11 +135,11 @@ const IdeasPage: React.FC = () => {
         </div>
       )}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6">
         {filteredContent.map((note) => (
           <Card
             key={note.id}
-            className={`p-4 flex flex-col justify-between border border-blue-800/25 bg-white rounded-md transition-all duration-500 ease-in-out`}
+            className="break-inside-avoid mb-6 p-4 flex flex-col justify-between border border-blue-800/25 bg-white rounded-md transition-all duration-500 ease-in-out self-start"
           >
             <CardHeader className="p-2 border-b">
               <CardTitle className="flex justify-between items-center p-0">
@@ -149,15 +149,13 @@ const IdeasPage: React.FC = () => {
                 <div className="flex gap-2 items-center">
                   {note.type === "DOCUMENT" && (
                     <div>
-                      <div>
-                        <a
-                          href={`${note.url}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <LucideLink className="w-4 h-4 text-gray-600 cursor-pointer" />
-                        </a>
-                      </div>
+                      <a
+                        href={`${note.url}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <LucideLink className="w-4 h-4 text-gray-600 cursor-pointer" />
+                      </a>
                     </div>
                   )}
                   <Trash2
@@ -168,9 +166,9 @@ const IdeasPage: React.FC = () => {
               </CardTitle>
             </CardHeader>
 
-            <CardContent className="p-2 flex-auto overflow-hidden border-b">
+            <CardContent className="p-2 border-b">
               {note.type === "DOCUMENT" ? (
-                <div className="flex h-full justify-center items-center">
+                <div className="flex justify-center items-center">
                   {getExtensionFromURL(note.url) === "pdf" ? (
                     <img
                       src="/pdf-document.svg"
@@ -182,7 +180,6 @@ const IdeasPage: React.FC = () => {
                   ) : isYouTubeUrl(note.url) ? (
                     <iframe
                       width="100%"
-                      height="200"
                       src={getYouTubeEmbedUrl(note.url) ?? ""}
                       title="YouTube Video"
                       frameBorder="0"
@@ -197,12 +194,11 @@ const IdeasPage: React.FC = () => {
                       className="text-blue-600 underline flex items-center"
                     >
                       <LucideLink className="w-4 h-4 mr-2" />
-                      {/* {note.url} */}
                     </a>
                   )}
                 </div>
               ) : (
-                <p className="text-gray-800 line-clamp-4">
+                <p className="text-gray-800">
                   {truncateContent(note.content, 50)}
                 </p>
               )}
