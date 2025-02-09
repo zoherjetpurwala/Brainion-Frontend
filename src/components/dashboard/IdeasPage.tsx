@@ -184,10 +184,13 @@ const IdeasPage: React.FC = () => {
                   ) : isYouTubeUrl(note.url) ? (
                     <iframe
                       width="100%"
+                      height="auto"
+                      style={{ aspectRatio: "16/9" }}
                       src={getYouTubeEmbedUrl(note.url) ?? ""}
                       title="YouTube Video"
                       frameBorder="0"
                       allowFullScreen
+                      loading="lazy"
                       className="rounded-lg"
                     />
                   ) : (
