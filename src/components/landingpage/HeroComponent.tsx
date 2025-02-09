@@ -14,11 +14,8 @@ const HeroComponent = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="relative flex flex-col items-center text-center max-sm:mt-20 gap-12 pb-16 pt-28 lg:pt-40 max-w-5xl mx-auto"
+      className="relative flex flex-col items-center text-center max-sm:mt-20 gap-12 pb-16 max-sm:pb-10 pt-28 lg:pt-40 max-w-5xl mx-auto"
     >
-      {/* Animated Background Gradient */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,128,255,0.25)_0%,_transparent_50%)] blur-2xl"></div>
-
       {/* Announcement Banner */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -61,6 +58,7 @@ const HeroComponent = () => {
         transition={{ delay: 0.5, duration: 1 }}
         className="absolute inset-x-0 bottom-[-20%] h-60 w-60 md:w-96 md:h-96 bg-[radial-gradient(circle,_rgba(0,128,255,0.2)_0%,_transparent_80%)] rounded-full blur-3xl"
       />
+
     </motion.div>
   );
 };

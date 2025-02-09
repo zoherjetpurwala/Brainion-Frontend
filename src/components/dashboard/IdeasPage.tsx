@@ -225,7 +225,10 @@ const IdeasPage: React.FC = () => {
                         {note.title}
                       </h1>
                     </TooltipTrigger>
-                    <TooltipContent className="bg-blue-700/25 backdrop-blur-xl shadow-sm p-2 text-gray-800" side="bottom">
+                    <TooltipContent
+                      className="bg-blue-700/25 backdrop-blur-xl shadow-sm p-2 text-gray-800"
+                      side="bottom"
+                    >
                       <p>{note.title}</p>
                     </TooltipContent>
                   </Tooltip>
