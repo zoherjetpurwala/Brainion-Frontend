@@ -14,7 +14,7 @@ const HeroComponent = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="relative flex flex-col items-center text-center max-sm:mt-20 gap-12 pb-16 max-sm:pb-10 pt-28 lg:pt-40 max-w-5xl mx-auto"
+      className="relative flex flex-col items-center text-center max-sm:mt-20 gap-12 pb-16 pt-28 lg:pt-40 max-w-5xl mx-auto"
     >
       {/* Announcement Banner */}
       <motion.div
