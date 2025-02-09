@@ -120,7 +120,7 @@ const DashboardPage = () => {
             <CardContent className="p-2 flex-auto overflow-hidden h-20">
               <div className="flex h-fullitems-center">
                 <p className="text-gray-800">
-                  You have created <b>{getCountByType("ALL")}</b> links so far.
+                  You have created <b>{getCountByType("LINK")}</b> links so far.
                 </p>
               </div>
             </CardContent>

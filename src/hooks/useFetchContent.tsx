@@ -1,12 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
+interface Metadata {
+  thumbnail?: string;
+}
+
 interface Content {
   id: string;
   type: string;
   title: string;
   content: string;
   url: string;
+  metadata: Metadata;
   createdAt: string;
 }
 
