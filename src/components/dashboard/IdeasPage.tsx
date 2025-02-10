@@ -151,7 +151,7 @@ const IdeasPage: React.FC = () => {
         </div>
       )}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="columns-1 sm:columns-2 md:columns-3 2xl:columns-4 gap-6">
+      <div className="columns-1 sm:columns-2 md:columns-2 2xl:columns-4 gap-6">
         {filteredContent.map((note) => (
           <Card
             key={note.id}
