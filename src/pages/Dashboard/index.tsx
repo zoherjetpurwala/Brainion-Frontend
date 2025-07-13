@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
         toggleSidebar={toggleSidebar}
       />
 
-      <div className="flex-1 lg:pl-64 flex flex-col w-full bg-white transition-all duration-300">
+      <div className="flex-1 lg:pl-72 flex flex-col w-full bg-white transition-all duration-300">
         {/* Navbar */}
         <DashboardNavbar
           toggleSidebar={toggleSidebar}
