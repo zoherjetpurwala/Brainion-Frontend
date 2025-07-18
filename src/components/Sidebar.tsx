@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
-      className={`fixed h-screen w-72 text-gray-800 flex flex-col max-sm:rounded-r-3xl justify-between items-center z-30 transform transition-all duration-500 ease-out bg-white backdrop-blur-sm border-r border-blue-200/50 ${
+      className={`fixed h-screen w-72 text-gray-800 flex flex-col max-sm:rounded-r-3xl justify-between items-center z-50 transform transition-all duration-500 ease-out bg-white backdrop-blur-sm border-r border-blue-200/50 ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       }`}
     >
