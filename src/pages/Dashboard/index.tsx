@@ -6,6 +6,7 @@ import DashboardNavbar from "../../components/DashboardNavbar";
 import SearchbarOverlay from "../../components/SearchbarOverlay";
 import DashboardPage from "../../components/dashboard/DashboardPage";
 import { useUserStore } from "../../store/useUserStore";
+import ProfilePage from "../../components/dashboard/ProfilePage";
 
 const Dashboard: React.FC = () => {
   const { loading } = useUserStore();
@@ -93,14 +94,7 @@ const Dashboard: React.FC = () => {
             <Route
               path="profile"
               element={
-                <div className="flex justify-center items-center">
-                  <div
-                    className="w-[512px] h-[512px] max-sm:w-96 max-sm:h-96 bg-cover bg-center bg-no-repeat rounded-3xl"
-                    style={{
-                      backgroundImage: "url('/comingsoon.svg')",
-                    }}
-                  ></div>
-                </div>
+                <ProfilePage/>
               }
             />
             <Route
