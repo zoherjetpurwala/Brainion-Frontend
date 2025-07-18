@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, SearchIcon, User, Settings, HelpCircle, LogOut, ChevronRight } from "lucide-react";
+import { Menu, X, SearchIcon, User, Settings, LogOut, ChevronRight } from "lucide-react";
 import UploadDialog from "./UploadDialog";
 import { useUserStore } from "../store/useUserStore";
 import { useNavigate } from "react-router-dom";
