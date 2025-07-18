@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     >
       <div className="w-full relative max-sm:rounded-r-3xl">
         {/* Header */}
-        <div className="flex items-center justify-between h-24 border-b border-blue-200/30 bg-blue-100/30 max-sm:rounded-r-3xl">
+        <div className="flex items-center justify-between h-24 border-b border-r border-blue-200/30 border-r-blue-200/50 bg-blue-50 max-sm:rounded-r-3xl">
           <div className="p-6">
             <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent ubuntu-medium">
               Brainion.

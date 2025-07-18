@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import IdeasPage from "../../components/dashboard/IdeasPage";
 import Sidebar from "../../components/Sidebar";
 import DashboardNavbar from "../../components/DashboardNavbar";
@@ -9,9 +9,23 @@ import { useUserStore } from "../../store/useUserStore";
 
 const Dashboard: React.FC = () => {
   const { loading } = useUserStore();
+  const location = useLocation();
   const [activeContent, setActiveContent] = useState<string>("Dashboard");
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/dashboard" || path === "/dashboard/") {
+      setActiveContent("Dashboard");
+    } else if (path === "/dashboard/ideas") {
+      setActiveContent("Ideas");
+    } else if (path === "/dashboard/profile") {
+      setActiveContent("Profile");
+    } else if (path === "/dashboard/settings") {
+      setActiveContent("Settings");
+    }
+  }, [location.pathname]);
 
   const toggleSearchBar = () => {
     setSearchOpen(!isSearchOpen);
@@ -20,10 +34,6 @@ const Dashboard: React.FC = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -39,6 +49,10 @@ const Dashboard: React.FC = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="flex h-screen relative">
@@ -74,10 +88,10 @@ const Dashboard: React.FC = () => {
         {/* Main Content */}
         <main className="mt-24">
           <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/ideas" element={<IdeasPage />} />
+            <Route index element={<DashboardPage />} />
+            <Route path="ideas" element={<IdeasPage />} />
             <Route
-              path="/profile"
+              path="profile"
               element={
                 <div className="flex justify-center items-center">
                   <div
@@ -90,7 +104,7 @@ const Dashboard: React.FC = () => {
               }
             />
             <Route
-              path="/settings"
+              path="settings"
               element={
                 <div className="flex justify-center items-center">
                   <div
@@ -102,7 +116,6 @@ const Dashboard: React.FC = () => {
                 </div>
               }
             />
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </main>
       </div>
